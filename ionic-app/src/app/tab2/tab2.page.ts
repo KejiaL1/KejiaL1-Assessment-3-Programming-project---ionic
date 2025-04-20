@@ -9,7 +9,7 @@ import { InventoryService } from '../services/inventory.service';
 import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; // 添加 RouterModule 导入
+import { Router, RouterModule } from '@angular/router'; // Add RouterModule import
 import { addIcons } from 'ionicons';
 import { 
   helpCircleOutline, 
@@ -33,7 +33,7 @@ import {
   styleUrls: ['tab2.page.scss'],
   standalone: true,
   imports: [
-    // 添加 RouterModule 到 imports 数组
+    // Adding a RouterModule to the imports array
     RouterModule,
     IonAvatar, IonBadge, IonButtons, IonIcon, 
     IonHeader, IonToolbar, IonTitle, IonContent, 
@@ -116,9 +116,9 @@ export class Tab2Page {
 
   async openHelp() {
     const alert = await this.alertController.create({
-      header: '帮助',
-      message: '填写所有带(*)的必填字段来添加新商品。设为推荐的商品会显示在下方列表中。',
-      buttons: ['确定']
+      header: 'Help',
+      message: 'Fill in all required fields with (*) to add a new product. Items set as recommended will be displayed in the list below.',
+      buttons: ['OK']
     });
     await alert.present();
   }
