@@ -3,25 +3,45 @@ import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, 
   IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, 
   IonTextarea, IonToggle, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, AlertController, IonIcon, IonButtons, IonBadge, IonAvatar } from '@ionic/angular/standalone';
+  IonCardContent, AlertController, IonIcon, IonButtons, IonBadge, 
+  IonAvatar, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { InventoryService } from '../services/inventory.service';
 import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // 添加 RouterModule 导入
 import { addIcons } from 'ionicons';
-import { helpCircle, star } from 'ionicons/icons';
+import { 
+  helpCircleOutline, 
+  star, 
+  addCircleOutline, 
+  pricetagOutline, 
+  gridOutline, 
+  cubeOutline, 
+  cashOutline, 
+  businessOutline, 
+  alertCircleOutline, 
+  starOutline, 
+  documentTextOutline, 
+  saveOutline, 
+  list 
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [IonAvatar, IonBadge, IonButtons, IonIcon, 
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem,
-    IonLabel, IonInput, IonSelect, IonSelectOption, IonButton,
-    IonTextarea, IonToggle, IonCard, IonCardHeader, IonCardTitle,
-    IonCardContent, FormsModule, CommonModule
+  imports: [
+    // 添加 RouterModule 到 imports 数组
+    RouterModule,
+    IonAvatar, IonBadge, IonButtons, IonIcon, 
+    IonHeader, IonToolbar, IonTitle, IonContent, 
+    IonList, IonItem, IonLabel, IonInput, 
+    IonSelect, IonSelectOption, IonButton,
+    IonTextarea, IonToggle, IonCard, IonCardHeader, 
+    IonCardTitle, IonCardContent, IonFab, IonFabButton,
+    FormsModule, CommonModule
   ]
 })
 export class Tab2Page {
@@ -45,7 +65,21 @@ export class Tab2Page {
     private router: Router,
     private alertController: AlertController
   ) {
-    addIcons({helpCircle,star});
+    addIcons({
+      helpCircleOutline, 
+      star, 
+      addCircleOutline, 
+      pricetagOutline, 
+      gridOutline, 
+      cubeOutline, 
+      cashOutline, 
+      businessOutline, 
+      alertCircleOutline, 
+      starOutline, 
+      documentTextOutline, 
+      saveOutline, 
+      list
+    });
     this.loadFeaturedItems();
   }
 
@@ -82,9 +116,9 @@ export class Tab2Page {
 
   async openHelp() {
     const alert = await this.alertController.create({
-      header: 'Help',
-      message: 'Fill in all required fields (*) to add a new inventory item. Featured items will appear in the list below.',
-      buttons: ['OK']
+      header: '帮助',
+      message: '填写所有带(*)的必填字段来添加新商品。设为推荐的商品会显示在下方列表中。',
+      buttons: ['确定']
     });
     await alert.present();
   }

@@ -1,86 +1,137 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button (click)="navCtrl.back()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>Edit Item</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="confirmDelete()" 
-                   [disabled]="isDeleteDisabled"
-                   color="danger">
-          <ion-icon name="trash"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <form #itemForm="ngForm" (ngSubmit)="updateItem()">
-      <ion-list>
-        <ion-item>
-          <ion-label>Item ID</ion-label>
-          <ion-label>{{item.item_id}}</ion-label>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Item Name*</ion-label>
-          <ion-input [(ngModel)]="item.item_name" name="item_name" required></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Category*</ion-label>
-          <ion-select [(ngModel)]="item.category" name="category" required>
-            <ion-select-option *ngFor="let cat of categories" [value]="cat">{{cat}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Quantity*</ion-label>
-          <ion-input type="number" [(ngModel)]="item.quantity" name="quantity" required min="0"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Price*</ion-label>
-          <ion-input type="number" [(ngModel)]="item.price" name="price" required min="0" step="0.01"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Supplier Name*</ion-label>
-          <div style="height: 8px;"></div>
-          <ion-input [(ngModel)]="item.supplier_name" name="supplier_name" required></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Stock Status*</ion-label>
-          <ion-select [(ngModel)]="item.stock_status" name="stock_status" required>
-            <ion-select-option *ngFor="let status of stockStatuses" [value]="status">{{status}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label>Featured Item</ion-label>
-          <ion-toggle [(ngModel)]="item.featured_item" [ngModelOptions]="{standalone: true}"></ion-toggle>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Special Note</ion-label>
-          <div style="height: 16px;"></div>
-          <ion-textarea [(ngModel)]="item.special_note" name="special_note" autoGrow rows="3"></ion-textarea>
-        </ion-item>
-      </ion-list>
-  
-      <ion-button expand="block" type="submit" [disabled]="!itemForm.valid" class="ion-margin">
-        Update Item
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="navCtrl.back()" fill="clear">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
       </ion-button>
-    </form>
-  
-    <ion-alert
-      [isOpen]="showDeleteAlert"
-      header="Confirm Delete"
-      [message]="'Are you sure you want to delete ' + item.item_name + '?'"
-      [buttons]="alertButtons"
-      (didDismiss)="showDeleteAlert = false">
-    </ion-alert>
-  </ion-content>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="create-outline" slot="start"></ion-icon>
+      Edit Item
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmDelete()" 
+                 [disabled]="isDeleteDisabled"
+                 fill="clear"
+                 color="danger">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form #itemForm="ngForm" (ngSubmit)="updateItem()">
+    <ion-list lines="full">
+      <!-- 商品ID -->
+      <ion-item>
+        <ion-label>
+          <ion-icon name="barcode-outline" slot="start"></ion-icon>
+          Item ID
+        </ion-label>
+        <ion-label>{{item.item_id}}</ion-label>
+      </ion-item>
+
+      <!-- 商品名称 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+          Item Name*
+        </ion-label>
+        <ion-input [(ngModel)]="item.item_name" name="item_name" required></ion-input>
+      </ion-item>
+
+      <!-- 商品分类 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="grid-outline" slot="start"></ion-icon>
+          Category*
+        </ion-label>
+        <ion-select [(ngModel)]="item.category" name="category" required interface="action-sheet">
+          <ion-select-option *ngFor="let cat of categories" [value]="cat">{{cat}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- 数量 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="cube-outline" slot="start"></ion-icon>
+          Category*
+        </ion-label>
+        <ion-input type="number" [(ngModel)]="item.quantity" name="quantity" required min="0"></ion-input>
+      </ion-item>
+
+      <!-- 价格 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="cash-outline" slot="start"></ion-icon>
+          Price*
+        </ion-label>
+        <ion-input type="number" [(ngModel)]="item.price" name="price" required min="0" step="0.01"></ion-input>
+      </ion-item>
+
+      <!-- 供应商 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="business-outline" slot="start"></ion-icon>
+          Supplier Name*
+        </ion-label>
+        <ion-input [(ngModel)]="item.supplier_name" name="supplier_name" required></ion-input>
+      </ion-item>
+
+      <!-- 库存状态 -->
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          Stock Status*
+        </ion-label>
+        <ion-select [(ngModel)]="item.stock_status" name="stock_status" required interface="action-sheet">
+          <ion-select-option *ngFor="let status of stockStatuses" [value]="status">{{status}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- 推荐商品 -->
+      <ion-item>
+        <ion-label>
+          <ion-icon name="star-outline" slot="start"></ion-icon>
+          Set as Featured Item
+        </ion-label>
+        <ion-toggle [(ngModel)]="item.featured_item" 
+                   [ngModelOptions]="{standalone: true}"
+                   color="warning"></ion-toggle>
+      </ion-item>
+
+      <!-- 备注 -->
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          Special Note
+        </ion-label>
+        <ion-textarea [(ngModel)]="item.special_note" 
+                     name="special_note" 
+                     autoGrow 
+                     rows="3"
+                     placeholder="Special Note information can be entered"></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <!-- 更新按钮 -->
+    <ion-button expand="block" 
+               type="submit" 
+               [disabled]="!itemForm.valid" 
+               class="ion-margin"
+               color="secondary">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Updated Item
+    </ion-button>
+  </form>
+
+  <!-- 删除确认对话框 -->
+  <ion-alert
+    [isOpen]="showDeleteAlert"
+    header="Confirm deletion"
+    [message]="'Are you sure you want to delete ' + item.item_name"
+    [buttons]="alertButtons"
+    (didDismiss)="showDeleteAlert = false">
+  </ion-alert>
+</ion-content>

@@ -1,30 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, 
   IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, 
-  IonTextarea, IonToggle, AlertController,
-  IonIcon, NavController, IonAlert, IonButtons } from '@ionic/angular/standalone';
-import { ActivatedRoute } from '@angular/router';
-import { InventoryService } from '../services/inventory.service';
-import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
+  IonTextarea, IonToggle, IonIcon, IonButtons, IonAlert, 
+  NavController, AlertController 
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { InventoryService } from '../services/inventory.service';
+import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { trash, arrowBack } from 'ionicons/icons';
+import { 
+  arrowBackOutline, 
+  createOutline, 
+  trashOutline, 
+  barcodeOutline, 
+  pricetagOutline, 
+  gridOutline, 
+  cubeOutline, 
+  cashOutline, 
+  businessOutline, 
+  alertCircleOutline, 
+  starOutline, 
+  documentTextOutline, 
+  saveOutline,
+  checkmarkCircleOutline,
+  closeCircleOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
   standalone: true,
-  imports: [IonButtons, 
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption,
-    IonButton, IonTextarea, IonToggle, IonAlert,
-    FormsModule, CommonModule, IonIcon
+  imports: [
+    RouterModule,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonList, IonItem, IonLabel, IonInput,
+    IonSelect, IonSelectOption, IonButton,
+    IonTextarea, IonToggle, IonIcon, IonButtons,
+    IonAlert, FormsModule, CommonModule
   ]
 })
-export class UpdatePage implements OnInit {
+export class UpdatePage {
   item: InventoryItem = {
     item_id: 0,
     item_name: '',
@@ -36,21 +55,20 @@ export class UpdatePage implements OnInit {
     featured_item: 0,
     special_note: ''
   };
-  
-  isDeleteDisabled: boolean = false;
-  showDeleteAlert: boolean = false;
 
-  // 删除确认对话框按钮配置
+  categories = Object.values(Category);
+  stockStatuses = Object.values(StockStatus);
+  isDeleteDisabled = false;
+  showDeleteAlert = false;
+  isLoading = true;
+
   alertButtons = [
     {
-      text: 'Cancel',
+      text: '取消',
       role: 'cancel',
-      handler: () => {
-        this.showDeleteAlert = false;
-      }
     },
     {
-      text: 'Delete',
+      text: '删除',
       role: 'destructive',
       handler: () => {
         this.deleteItem();
@@ -58,21 +76,32 @@ export class UpdatePage implements OnInit {
     }
   ];
 
-  categories = Object.values(Category);
-  stockStatuses = Object.values(StockStatus);
-
   constructor(
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
     private alertController: AlertController,
-    public navCtrl: NavController
+    public navCtrl: NavController  // ← 这里改为 public
   ) {
-    addIcons({ trash, arrowBack });
+    addIcons({
+      arrowBackOutline,
+      createOutline,
+      trashOutline,
+      barcodeOutline,
+      pricetagOutline,
+      gridOutline,
+      cubeOutline,
+      cashOutline,
+      businessOutline,
+      alertCircleOutline,
+      starOutline,
+      documentTextOutline,
+      saveOutline,
+      checkmarkCircleOutline,
+      closeCircleOutline
+    });
   }
 
-  isLoading = true; // 添加加载状态
-  
-  ngOnInit() {
+  ionViewWillEnter() {
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       this.loadItem(name);
@@ -81,27 +110,33 @@ export class UpdatePage implements OnInit {
   }
 
   loadItem(name: string) {
+    this.isLoading = true;
     this.inventoryService.getItemByName(name).subscribe({
       next: (data) => {
         this.item = data;
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error loading item:', err);
-        this.showErrorAlert('Failed to load item');
+        console.error('加载商品失败:', err);
+        this.showErrorAlert('加载商品失败');
         this.navCtrl.navigateBack('/tabs/tab1');
+        this.isLoading = false;
       }
     });
   }
 
   updateItem() {
+    this.isLoading = true;
     this.inventoryService.updateItem(this.item.item_name, this.item).subscribe({
       next: () => {
-        this.showSuccessAlert('Item updated successfully!');
+        this.showSuccessAlert('商品更新成功!');
         this.navCtrl.navigateBack('/tabs/tab1');
+        this.isLoading = false;
       },
       error: (err) => {
-        this.showErrorAlert('Failed to update item');
-        console.error('Error updating item:', err);
+        this.showErrorAlert('更新商品失败');
+        console.error('更新商品失败:', err);
+        this.isLoading = false;
       }
     });
   }
@@ -111,14 +146,17 @@ export class UpdatePage implements OnInit {
   }
 
   deleteItem() {
+    this.isLoading = true;
     this.inventoryService.deleteItem(this.item.item_name).subscribe({
       next: () => {
-        this.showSuccessAlert('Item deleted successfully!');
+        this.showSuccessAlert('商品删除成功!');
         this.navCtrl.navigateBack('/tabs/tab1');
+        this.isLoading = false;
       },
       error: (err) => {
-        this.showErrorAlert('Failed to delete item');
-        console.error('Error deleting item:', err);
+        this.showErrorAlert('删除商品失败');
+        console.error('删除商品失败:', err);
+        this.isLoading = false;
       },
       complete: () => {
         this.showDeleteAlert = false;
@@ -128,18 +166,20 @@ export class UpdatePage implements OnInit {
 
   private async showSuccessAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Success',
+      header: '成功',
       message: message,
-      buttons: ['OK']
+      buttons: ['确定'],
+      cssClass: 'success-alert'
     });
     await alert.present();
   }
 
   private async showErrorAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Error',
+      header: '错误',
       message: message,
-      buttons: ['OK']
+      buttons: ['确定'],
+      cssClass: 'error-alert'
     });
     await alert.present();
   }

@@ -1,45 +1,139 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Inventory</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-icon name="cube-outline" slot="start"></ion-icon>
+      Inventory Management
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openHelp()">
-        <ion-icon name="help-circle"></ion-icon>
+      <ion-button (click)="openHelp()" fill="clear">
+        <ion-icon name="help-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toggleViewMode()" fill="clear">
+        <ion-icon [name]="isCardView ? 'list-outline' : 'grid-outline'" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  
+  <ion-toolbar color="primary">
     <ion-searchbar 
       [(ngModel)]="searchTerm" 
-      (ionChange)="searchItems()" 
-      placeholder="Search by name"
-      animated="true"
-      showClearButton="focus"
-    ></ion-searchbar>
+      (ionInput)="searchItems()"
+      placeholder="Search for product name..."
+      animated
+      debounce="300"
+      color="light"
+      showClearButton="focus">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- 折叠标题 -->
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Inventory</ion-title>
+    <ion-toolbar color="primary">
+      <ion-title size="large">Inventory List</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-item *ngFor="let item of filteredItems" [routerLink]="['/update', item.item_name]">
+  <!-- 空状态提示 -->
+  <div *ngIf="filteredItems.length === 0" class="empty-state">
+    <ion-icon name="alert-circle-outline" color="medium"></ion-icon>
+    <ion-text color="medium">
+      <p>{{ searchTerm ? 'No matching products found' : 'Inventory is empty' }}</p>
+      <ion-button *ngIf="!searchTerm" fill="outline" [routerLink]="['/tabs/tab2']">
+        Add Product
+      </ion-button>
+    </ion-text>
+  </div>
+
+  <!-- 卡片视图 -->
+  <div *ngIf="isCardView && filteredItems.length > 0" class="card-view">
+    <ion-card 
+      *ngFor="let item of filteredItems" 
+      [routerLink]="['/update', item.item_name]"
+      [class.featured-item]="item.featured_item === 1">
+      
+      <ion-card-header>
+        <ion-card-title>
+          {{ item.item_name }}
+          <ion-badge *ngIf="item.featured_item === 1" color="warning" class="featured-badge">
+            Featured Item
+          </ion-badge>
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-chip outline color="primary">
+            <ion-icon name="pricetag-outline" size="small"></ion-icon>
+            <ion-label>{{ item.category }}</ion-label>
+          </ion-chip>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid class="info-grid">
+          <ion-row>
+            <ion-col size="6">
+              <div class="info-label">Quantity</div>
+              <div class="info-value">{{ item.quantity }}</div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="info-label">Price</div>
+              <div class="info-value">${{ item.price | number:'1.2-2' }}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-badge [color]="getStatusColor(item.stock_status)" class="status-badge">
+                <ion-icon [name]="getStatusIcon(item.stock_status)" slot="start"></ion-icon>
+                {{ item.stock_status }}
+              </ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- 列表视图 -->
+  <ion-list *ngIf="!isCardView && filteredItems.length > 0" lines="full">
+    <ion-item 
+      *ngFor="let item of filteredItems" 
+      [routerLink]="['/update', item.item_name]"
+      [class.featured-item]="item.featured_item === 1"
+      detail="true">
+      
+      <ion-avatar slot="start">
+        <ion-icon 
+          [name]="getCategoryIcon(item.category)" 
+          [color]="getCategoryColor(item.category)">
+        </ion-icon>
+      </ion-avatar>
+
       <ion-label>
-        <h2>{{ item.item_name }}</h2>
-        <p>Category: {{ item.category }} | Qty: {{ item.quantity }}</p>
-        <p>Status: {{ item.stock_status }} | Price: ${{ item.price }}</p>
+        <h2>
+          {{ item.item_name }}
+          <ion-badge *ngIf="item.featured_item === 1" color="warning">推荐</ion-badge>
+        </h2>
+        <p>
+          <ion-text color="medium">{{ item.category }}</ion-text>
+          • Stock Status: {{ item.quantity }}
+        </p>
+        <p>
+          <ion-text color="dark">${{ item.price | number:'1.2-2' }}</ion-text>
+          • Supplier Name: {{ item.supplier_name }}
+        </p>
       </ion-label>
-      <ion-badge slot="end" [color]="getStatusColor(item.stock_status)">
+
+      <ion-badge 
+        slot="end" 
+        [color]="getStatusColor(item.stock_status)">
         {{ item.stock_status }}
       </ion-badge>
     </ion-item>
   </ion-list>
 
+  <!-- 添加按钮 -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/tabs/tab2']">
+    <ion-fab-button [routerLink]="['/tabs/tab2']" color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
