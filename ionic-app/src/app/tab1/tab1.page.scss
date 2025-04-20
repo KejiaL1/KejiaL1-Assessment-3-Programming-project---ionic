@@ -1,0 +1,16 @@
+/* Optional custom styles */
+ion-item {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --inner-padding-end: 10px;
+  }
+  
+  ion-label p {
+    color: var(--ion-color-medium);
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  
+  ion-badge {
+    margin-left: 10px;
+  }

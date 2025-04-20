@@ -1,0 +1,30 @@
+/* Custom styles for update page */
+ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+  }
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 16px;
+  }
+  
+  ion-button[type="submit"] {
+    margin-top: 24px;
+  }
+  
+  ion-toggle {
+    padding-right: 8px;
+  }
+  
+  ion-textarea {
+    border: 1px solid var(--ion-color-light-shade);
+    border-radius: 8px;
+    margin-top: 8px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    min-height: 100px;
+  }
