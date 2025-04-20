@@ -68,7 +68,7 @@ export class UpdatePage {
       role: 'cancel',
     },
     {
-      text: 'Removing',
+      text: 'Delete',
       role: 'destructive',
       handler: () => {
         this.deleteItem();
