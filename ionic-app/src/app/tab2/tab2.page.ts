@@ -116,9 +116,9 @@ export class Tab2Page {
 
   async openHelp() {
     const alert = await this.alertController.create({
-      header: '帮助',
-      message: '填写所有带(*)的必填字段来添加新商品。设为推荐的商品会显示在下方列表中。',
-      buttons: ['确定']
+      header: 'Help',
+      message: 'Fill in all required fields with (*) to add a new product. Items set as recommended will be displayed in the list below.',
+      buttons: ['OK']
     });
     await alert.present();
   }
