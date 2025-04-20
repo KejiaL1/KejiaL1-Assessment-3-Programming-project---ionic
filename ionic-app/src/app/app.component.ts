@@ -2,8 +2,18 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons'
 import { 
-  lockClosed, informationCircle, warning, 
-  shieldCheckmark, checkmarkCircle, alertCircle 
+  lockClosed,
+  informationCircle,
+  warning, 
+  shieldCheckmark,
+  checkmarkCircle,
+  alertCircle,
+  listOutline,
+  hardwareChipOutline,
+  layersOutline, 
+  constructOutline,
+  gridOutline,
+  shirtOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -20,7 +30,13 @@ export class AppComponent {
       'warning': warning,
       'shield-checkmark': shieldCheckmark,
       'checkmark-circle': checkmarkCircle,
-      'alert-circle': alertCircle
+      'alert-circle': alertCircle,
+      'list-outline': listOutline,
+      'hardware-chip-outline': hardwareChipOutline,
+      'construct-outline': constructOutline,
+      'grid-outline': gridOutline,
+      'shirt-outline': shirtOutline,
+      'layers-outline': layersOutline
     });
   }
 }
