@@ -21,7 +21,7 @@
 
   <form #itemForm="ngForm" (ngSubmit)="addItem()">
     <ion-list lines="full">
-      <!-- 商品名称 -->
+      <!-- Product Name -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="pricetag-outline" slot="start"></ion-icon>
@@ -35,7 +35,7 @@
         ></ion-input>
       </ion-item>
 
-      <!-- 商品分类 -->
+      <!-- Classification -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="grid-outline" slot="start"></ion-icon>
@@ -53,7 +53,7 @@
         </ion-select>
       </ion-item>
 
-      <!-- 数量 -->
+      <!-- Quantity -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="cube-outline" slot="start"></ion-icon>
@@ -69,7 +69,7 @@
         ></ion-input>
       </ion-item>
 
-      <!-- 价格 -->
+      <!-- Price -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="cash-outline" slot="start"></ion-icon>
@@ -86,7 +86,7 @@
         ></ion-input>
       </ion-item>
 
-      <!-- 供应商 -->
+      <!-- Supplier -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="business-outline" slot="start"></ion-icon>
@@ -100,7 +100,7 @@
         ></ion-input>
       </ion-item>
 
-      <!-- 库存状态 -->
+      <!-- Stock Status -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
@@ -118,7 +118,7 @@
         </ion-select>
       </ion-item>
 
-      <!-- 推荐商品 -->
+      <!-- Recommended Products -->
       <ion-item>
         <ion-label>
           <ion-icon name="star-outline" slot="start"></ion-icon>
@@ -131,7 +131,7 @@
         ></ion-toggle>
       </ion-item>
 
-      <!-- 备注 -->
+      <!-- Remarks -->
       <ion-item>
         <ion-label position="stacked">
           <ion-icon name="document-text-outline" slot="start"></ion-icon>
@@ -147,7 +147,7 @@
       </ion-item>
     </ion-list>
 
-    <!-- 提交按钮 -->
+    <!-- Submit Button -->
     <ion-button 
       expand="block" 
       type="submit" 
@@ -160,7 +160,7 @@
     </ion-button>
   </form>
 
-  <!-- 推荐商品列表 -->
+  <!-- Recommended Products List -->
   <ion-card *ngIf="featuredItems.length > 0" class="featured-card">
     <ion-card-header>
       <ion-card-title>
@@ -186,7 +186,7 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- 返回列表按钮 -->
+  <!-- Back to list button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/tabs/tab1']" color="primary">
       <ion-icon name="list"></ion-icon>

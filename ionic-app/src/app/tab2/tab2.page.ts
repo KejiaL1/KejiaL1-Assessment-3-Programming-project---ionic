@@ -9,7 +9,7 @@ import { InventoryService } from '../services/inventory.service';
 import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; // 添加 RouterModule 导入
+import { Router, RouterModule } from '@angular/router'; // Add RouterModule import
 import { addIcons } from 'ionicons';
 import { 
   helpCircleOutline, 
@@ -33,7 +33,7 @@ import {
   styleUrls: ['tab2.page.scss'],
   standalone: true,
   imports: [
-    // 添加 RouterModule 到 imports 数组
+    // Adding a RouterModule to the imports array
     RouterModule,
     IonAvatar, IonBadge, IonButtons, IonIcon, 
     IonHeader, IonToolbar, IonTitle, IonContent, 

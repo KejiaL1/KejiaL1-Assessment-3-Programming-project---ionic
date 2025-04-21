@@ -28,14 +28,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- 折叠标题 -->
+  <!-- Folding titl -->
   <ion-header collapse="condense">
     <ion-toolbar color="primary">
       <ion-title size="large">Inventory List</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- 空状态提示 -->
+  <!-- Empty Status Alert-->
   <div *ngIf="filteredItems.length === 0" class="empty-state">
     <ion-icon name="alert-circle-outline" color="medium"></ion-icon>
     <ion-text color="medium">
@@ -46,7 +46,7 @@
     </ion-text>
   </div>
 
-  <!-- 卡片视图 -->
+  <!-- Card View -->
   <div *ngIf="isCardView && filteredItems.length > 0" class="card-view">
     <ion-card 
       *ngFor="let item of filteredItems" 
@@ -93,7 +93,7 @@
     </ion-card>
   </div>
 
-  <!-- 列表视图 -->
+  <!-- List View -->
   <ion-list *ngIf="!isCardView && filteredItems.length > 0" lines="full">
     <ion-item 
       *ngFor="let item of filteredItems" 
@@ -131,7 +131,7 @@
     </ion-item>
   </ion-list>
 
-  <!-- 添加按钮 -->
+  <!-- Add Button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/tabs/tab2']" color="secondary">
       <ion-icon name="add"></ion-icon>

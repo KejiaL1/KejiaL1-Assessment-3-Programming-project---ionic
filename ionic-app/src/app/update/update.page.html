@@ -23,7 +23,7 @@
 <ion-content [fullscreen]="true">
   <form #itemForm="ngForm" (ngSubmit)="updateItem()">
     <ion-list lines="full">
-      <!-- 商品ID -->
+      <!-- Item ID -->
       <ion-item>
         <ion-label>
           <ion-icon name="barcode-outline" slot="start"></ion-icon>
@@ -32,7 +32,7 @@
         <ion-label>{{item.item_id}}</ion-label>
       </ion-item>
 
-      <!-- 商品名称 -->
+      <!-- Item Name -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="pricetag-outline" slot="start"></ion-icon>
@@ -41,7 +41,7 @@
         <ion-input [(ngModel)]="item.item_name" name="item_name" required></ion-input>
       </ion-item>
 
-      <!-- 商品分类 -->
+      <!-- Category -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="grid-outline" slot="start"></ion-icon>
@@ -52,16 +52,16 @@
         </ion-select>
       </ion-item>
 
-      <!-- 数量 -->
+      <!-- Quantity -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="cube-outline" slot="start"></ion-icon>
-          Category*
+          Quantity*
         </ion-label>
         <ion-input type="number" [(ngModel)]="item.quantity" name="quantity" required min="0"></ion-input>
       </ion-item>
 
-      <!-- 价格 -->
+      <!-- Price -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="cash-outline" slot="start"></ion-icon>
@@ -70,7 +70,7 @@
         <ion-input type="number" [(ngModel)]="item.price" name="price" required min="0" step="0.01"></ion-input>
       </ion-item>
 
-      <!-- 供应商 -->
+      <!-- Supplier -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="business-outline" slot="start"></ion-icon>
@@ -79,7 +79,7 @@
         <ion-input [(ngModel)]="item.supplier_name" name="supplier_name" required></ion-input>
       </ion-item>
 
-      <!-- 库存状态 -->
+      <!-- Stock Status -->
       <ion-item>
         <ion-label position="floating">
           <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
@@ -90,7 +90,7 @@
         </ion-select>
       </ion-item>
 
-      <!-- 推荐商品 -->
+      <!-- Featured Item -->
       <ion-item>
         <ion-label>
           <ion-icon name="star-outline" slot="start"></ion-icon>
@@ -101,7 +101,7 @@
                    color="warning"></ion-toggle>
       </ion-item>
 
-      <!-- 备注 -->
+      <!-- Note -->
       <ion-item>
         <ion-label position="stacked">
           <ion-icon name="document-text-outline" slot="start"></ion-icon>
@@ -115,7 +115,7 @@
       </ion-item>
     </ion-list>
 
-    <!-- 更新按钮 -->
+    <!-- Update Button -->
     <ion-button expand="block" 
                type="submit" 
                [disabled]="!itemForm.valid" 
@@ -126,7 +126,7 @@
     </ion-button>
   </form>
 
-  <!-- 删除确认对话框 -->
+  <!-- Delete Confirmation Dialog -->
   <ion-alert
     [isOpen]="showDeleteAlert"
     header="Confirm deletion"

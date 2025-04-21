@@ -104,7 +104,8 @@ export class Tab1Page implements OnInit {
     return icons[category] || 'help-outline';
   }
 
-  // 新增分类颜色
+  // New Category Colours
+
   getCategoryColor(category: string): string {
     const colors: {[key: string]: string} = {
       'Electronics': 'tertiary',
@@ -116,7 +117,8 @@ export class Tab1Page implements OnInit {
     return colors[category] || 'primary';
   }
 
-  // 新增状态图标
+  // Add status icon
+
   getStatusIcon(status: string): string {
     const icons: {[key: string]: string} = {
       'In Stock': 'checkmark-circle-outline',
@@ -126,7 +128,7 @@ export class Tab1Page implements OnInit {
     return icons[status] || 'help-circle-outline';
   }
 
-  // 切换视图模式
+  // Switch view mode
   toggleViewMode() {
     this.isCardView = !this.isCardView;
   }

@@ -64,11 +64,11 @@ export class UpdatePage {
 
   alertButtons = [
     {
-      text: 'Cancel',
+      text: '取消',
       role: 'cancel',
     },
     {
-      text: 'Delete',
+      text: '删除',
       role: 'destructive',
       handler: () => {
         this.deleteItem();
@@ -80,7 +80,7 @@ export class UpdatePage {
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
     private alertController: AlertController,
-    public navCtrl: NavController
+    public navCtrl: NavController  
   ) {
     addIcons({
       arrowBackOutline,
@@ -105,7 +105,7 @@ export class UpdatePage {
     const name = this.route.snapshot.paramMap.get('name');
     if (name) {
       this.loadItem(name);
-      this.isDeleteDisabled = name === 'Laptop'; // 禁用Laptop的删除
+      this.isDeleteDisabled = name === 'Laptop'; 
     }
   }
 
@@ -117,8 +117,8 @@ export class UpdatePage {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load Item:', err);
-        this.showErrorAlert('Failed to load Item');
+        console.error('加载商品失败:', err);
+        this.showErrorAlert('加载商品失败');
         this.navCtrl.navigateBack('/tabs/tab1');
         this.isLoading = false;
       }
@@ -129,13 +129,13 @@ export class UpdatePage {
     this.isLoading = true;
     this.inventoryService.updateItem(this.item.item_name, this.item).subscribe({
       next: () => {
-        this.showSuccessAlert('Item Update Successful!');
+        this.showSuccessAlert('商品更新成功!');
         this.navCtrl.navigateBack('/tabs/tab1');
         this.isLoading = false;
       },
       error: (err) => {
-        this.showErrorAlert('Failed to update Item');
-        console.error('Failed to update Item:', err);
+        this.showErrorAlert('更新商品失败');
+        console.error('更新商品失败:', err);
         this.isLoading = false;
       }
     });
@@ -149,13 +149,13 @@ export class UpdatePage {
     this.isLoading = true;
     this.inventoryService.deleteItem(this.item.item_name).subscribe({
       next: () => {
-        this.showSuccessAlert('Item deleted successfully!');
+        this.showSuccessAlert('商品删除成功!');
         this.navCtrl.navigateBack('/tabs/tab1');
         this.isLoading = false;
       },
       error: (err) => {
-        this.showErrorAlert('Failed to delete Item');
-        console.error('Failed to delete Item:', err);
+        this.showErrorAlert('删除商品失败');
+        console.error('删除商品失败:', err);
         this.isLoading = false;
       },
       complete: () => {
@@ -166,9 +166,9 @@ export class UpdatePage {
 
   private async showSuccessAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Successes!',
+      header: '成功',
       message: message,
-      buttons: ['Define'],
+      buttons: ['确定'],
       cssClass: 'success-alert'
     });
     await alert.present();
@@ -176,9 +176,9 @@ export class UpdatePage {
 
   private async showErrorAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Error',
+      header: '错误',
       message: message,
-      buttons: ['Define'],
+      buttons: ['确定'],
       cssClass: 'error-alert'
     });
     await alert.present();
