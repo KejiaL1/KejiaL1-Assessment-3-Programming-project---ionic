@@ -80,7 +80,7 @@ export class UpdatePage {
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
     private alertController: AlertController,
-    public navCtrl: NavController  // ← 这里改为 public
+    public navCtrl: NavController
   ) {
     addIcons({
       arrowBackOutline,
