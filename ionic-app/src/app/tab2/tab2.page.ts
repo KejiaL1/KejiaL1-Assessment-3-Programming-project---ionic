@@ -1,3 +1,12 @@
+/* 
+ * Filename: tab2.page.ts
+ * Author: Shimin Jin 
+ * Assignment Part: Add Component 
+ * Creation Date: 14 Apr 2025 
+ * Last Modified: 20 Apr 2025 
+ * Version: 1.0.0 
+ * Description: This is to add a tab to add product information and display special products 
+ */
 import { Component } from '@angular/core';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, 
