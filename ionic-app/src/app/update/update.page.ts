@@ -1,3 +1,12 @@
+/*
+ * File name: update.page.ts
+ * Author: Lehan Zhang
+ * Job Part: Item Update Page Logic Component
+ * Creation Date: April 15, 2025
+ * Last Modified: April 20, 2025
+ * Version: 1.0.0
+ * Description: This is the item update screen logic component, responsible for writing the logic and functionality of the item update screen.
+ */
 import { Component } from '@angular/core';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, 
