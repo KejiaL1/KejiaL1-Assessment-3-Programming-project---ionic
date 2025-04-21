@@ -9,7 +9,7 @@ import { InventoryService } from '../services/inventory.service';
 import { InventoryItem, Category, StockStatus } from '../models/inventory-item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; // Add RouterModule import
+import { Router, RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { 
   helpCircleOutline, 
