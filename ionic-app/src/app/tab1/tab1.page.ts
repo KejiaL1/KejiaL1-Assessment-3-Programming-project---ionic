@@ -1,3 +1,12 @@
+/* 
+ * Filename: tab1.page.ts
+ * Author: Kejia Li
+ * Assignment Part: List Component 
+ * Creation Date: 14 Apr 2025 
+ * Last Modified: 20 Apr 2025 
+ * Version: 1.0.0 
+ * Description: A page for listing all records and searching a single record with name
+ */
 import { Component, OnInit } from '@angular/core';
 import { 
   IonHeader, 
